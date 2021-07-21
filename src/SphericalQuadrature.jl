@@ -1,6 +1,5 @@
 module SphericalQuadrature;
 
-using LinearAlgebra: Iterators
 using LinearAlgebra, FastGaussQuadrature;
 
 flatten = A -> collect(Iterators.flatten(A));
@@ -20,8 +19,6 @@ end
 function surfaceareasphere(n) 
     return (n+1)*volumesphere(n+1)
 end
-
-#Test; otrogonalidad de polinomios harmónicos, valores de los monomios en la esfera
 
 function sphericalquadrature(n,deg)
     x,wx = Float64[1,-1],Float64[1,1];
