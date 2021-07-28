@@ -10,7 +10,7 @@ function solvehomogeneous(p,vars,m)
     deg = maxdegree(p);
     h2m = GammaOperator.inverseeval(m,p,vars);
     fixedh2m = FixedPolynomials.Polynomial{Float64}(h2m);
-    z,wz = SphericalQuadrature.sphericalquadrature(n,deg+2);
+    z,wz = SphericalQuadrature.sphericalquadrature(n,deg+2*m);
     evals = map(x->FixedPolynomials.evaluate(fixedh2m,x),z);
     alpha = minimum(evals);
     return alpha

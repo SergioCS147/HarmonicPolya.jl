@@ -11,7 +11,7 @@ function eigenvalues(n,m,k)
         throw(DomainError(n,"dimension must be positive"));
     end
     if k > m
-        throw(DomainError(k,"degree must be lesser than m"));
+        throw(DomainError(k,"degree must be lesser than or equal to m"));
     end 
     # for i=0, the eigenvalue is always 0
     values = [1.0];
