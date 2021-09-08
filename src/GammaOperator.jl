@@ -1,7 +1,7 @@
 module GammaOperator;
 
 include("HarmonicBases.jl")
-using LinearAlgebra, .HarmonicBasis
+using LinearAlgebra, SpecialFunctions, .HarmonicBasis
 
 function eigenvalues(n,m,k)
     if m < 0
@@ -24,14 +24,18 @@ function eigenvalues(n,m,k)
         end
         push!(values,lambda);
     end
-    return values
+    #normalization = 2*pi^(n/2)/SpecialFunctions.gamma(n/2)
+    return values #.* normalization
 end
 
 function evaluation(m,p,vars)
     desc = HarmonicBasis.harmonicdecomposition(p,vars)
     n = length(vars)
-    k = maxdegree(p)
-    if k != mindegree(p)
+    k = floor(Int,maxdegree(p)/2)
+    if 2*k != maxdegree(p)
+        throw(DomainError(p,"polynomial p be of even degree"))
+    end
+    if 2*k != mindegree(p)
         throw(DomainError(p,"polynomial p must be homogeneous"))
     end
     eigvals = eigenvalues(n,m,k)
@@ -42,8 +46,11 @@ end
 function inverseeval(m,p,vars)
     desc = HarmonicBasis.harmonicdecomposition(p,vars)
     n = length(vars)
-    k = maxdegree(p)
-    if k != mindegree(p)
+    k = floor(Int,maxdegree(p)/2)
+    if 2*k != maxdegree(p)
+        throw(DomainError(p,"polynomial p be of even degree"))
+    end
+    if 2*k != mindegree(p)
         throw(DomainError(p,"polynomial p must be homogeneous"))
     end
     eigvals = eigenvalues(n,m,k)

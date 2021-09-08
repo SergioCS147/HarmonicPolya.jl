@@ -145,5 +145,3 @@ function laplacianmatrix(m,vars)
 end
 
 end
-
-using .HarmonicBasis, DynamicPolynomials
