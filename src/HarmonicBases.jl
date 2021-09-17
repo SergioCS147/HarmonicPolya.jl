@@ -1,4 +1,4 @@
-module HarmonicBasis; 
+module HarmonicBases; 
 
 using LinearAlgebra: length
 using LinearAlgebra, DynamicPolynomials, MultivariatePolynomials;

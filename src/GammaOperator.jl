@@ -1,7 +1,7 @@
 module GammaOperator;
 
 include("HarmonicBases.jl")
-using LinearAlgebra, SpecialFunctions, .HarmonicBasis
+using LinearAlgebra, DynamicPolynomials, SpecialFunctions, .HarmonicBases
 
 function eigenvalues(n,m,k)
     if m < 0
@@ -29,7 +29,7 @@ function eigenvalues(n,m,k)
 end
 
 function evaluation(m,p,vars)
-    desc = HarmonicBasis.harmonicdecomposition(p,vars)
+    desc = HarmonicBases.harmonicdecomposition(p,vars)
     n = length(vars)
     k = floor(Int,maxdegree(p)/2)
     if 2*k != maxdegree(p)
@@ -44,7 +44,7 @@ function evaluation(m,p,vars)
 end
 
 function inverseeval(m,p,vars)
-    desc = HarmonicBasis.harmonicdecomposition(p,vars)
+    desc = HarmonicBases.harmonicdecomposition(p,vars)
     n = length(vars)
     k = floor(Int,maxdegree(p)/2)
     if 2*k != maxdegree(p)

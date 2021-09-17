@@ -15,3 +15,11 @@ I_0 = sum(wz)
 I_1 = dot(wz,p_1.(z))
 I_2 = dot(wz,p_2.(z))
 I_3 = dot(wz,p_3.(z))
+
+z100,wz100 = SphericalQuadrature.sphericalquadrature(3,100)
+
+p_4 = Polynomial{Float64}(x[1]^100)
+p_5 = Polynomial{Float64}(x[1]^99)
+
+I_4 = dot(wz100,p_4.(z100))
+I_5 = dot(wz100,p_5.(z100))

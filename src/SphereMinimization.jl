@@ -3,11 +3,11 @@ module SphereMinimization;
 include("SphericalQuadrature.jl")
 include("HarmonicBases.jl")
 include("GammaOperator.jl")
-using LinearAlgebra, FixedPolynomials, .SphericalQuadrature, .HarmonicBasis, .GammaOperator
+using LinearAlgebra, DynamicPolynomials, FixedPolynomials, .SphericalQuadrature, .HarmonicBases, .GammaOperator
 
 function solvehomogeneous(p,vars,m)
     n = length(vars);
-    deg = maxdegree(p);
+    deg = DynamicPolynomials.maxdegree(p);
     h2m = GammaOperator.inverseeval(m,p,vars);
     fixedh2m = FixedPolynomials.Polynomial{Float64}(h2m);
     z,wz = SphericalQuadrature.sphericalquadrature(n,deg+2*m);
