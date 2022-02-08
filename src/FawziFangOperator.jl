@@ -70,9 +70,10 @@ function eigenvalues(n,m,k)
     T = (1/k)*( I + sum( [ ((PolynomialBases.gegenbauer(1.0,2*j,(n-2)/2)^2 * normalizationfactor(n,0) )/((binomial(n+2*j-1,2*j)-binomial(n+2*j-3,2*j-2))^2 * normalizationfactor(n,2*j))) * invA0 * Amatrix(n,m,k,2*j) for j in 1:1:k ] ));
     V = eigen(T, sortby=abs);
     e = V.vectors[:,m+1]/norm(V.vectors[:,m+1]);
-    values = [1.0];
-    for i in 1:1:k
-        lambda = dot(e,Amatrix(n,m,k,2*i)*e)*(PolynomialBases.gegenbauer(1.0,2*i,(n-2)/2)^2 * SphericalQuadrature.surfaceareasphere(n)^2)/((binomial(n+2*i-1,2*i)-binomial(n+2*i-3,2*i-2))^2 * normalizationfactor(n,2*i));
+    eta = (sqrt(normalizationfactor(n,0))/SphericalQuadrature.surfaceareasphere(n)) * LinearAlgebra.inv(sqrt(Amatrix(n,m,k,0))) * e
+    values = [];
+    for i in 0:1:k
+        lambda = dot(eta,Amatrix(n,m,k,2*i)*eta)*(PolynomialBases.gegenbauer(1.0,2*i,(n-2)/2)^2 * SphericalQuadrature.surfaceareasphere(n)^2)/((binomial(n+2*i-1,2*i)-binomial(n+2*i-3,2*i-2))^2 * normalizationfactor(n,2*i));
         push!(values, lambda);
     end
     return values;

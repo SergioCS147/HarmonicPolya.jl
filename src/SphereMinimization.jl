@@ -22,7 +22,7 @@ function solvehomogeneousfawzi(p,vars,m)
     deg = DynamicPolynomials.maxdegree(p);
     h2m = FawziFangOperator.inverseeval(m,p,vars);
     fixedh2m = FixedPolynomials.Polynomial{Float64}(h2m);
-    z,wz = SphericalQuadrature.sphericalquadrature(n,deg+2*m);
+    z,wz = SphericalQuadrature.sphericalquadrature(n,deg+2*m+1);
     evals = map(x->FixedPolynomials.evaluate(fixedh2m,x),z);
     alpha = minimum(evals);
     return alpha
