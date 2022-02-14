@@ -1,4 +1,4 @@
-module GammaOperator;
+module SquaresOperator;
 
 include("HarmonicBases.jl")
 using LinearAlgebra, DynamicPolynomials, SpecialFunctions, .HarmonicBases
