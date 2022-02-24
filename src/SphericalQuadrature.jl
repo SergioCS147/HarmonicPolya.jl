@@ -1,7 +1,3 @@
-module SphericalQuadrature;
-
-using LinearAlgebra, FastGaussQuadrature;
-
 flatten = A -> collect(Iterators.flatten(A));
 
 function volumesphere(n)
@@ -33,6 +29,4 @@ function sphericalquadrature(n,deg)
         throw(DomainError(n,"dimension argument must be positive"));
     end
     return x,wx
-end
-
 end

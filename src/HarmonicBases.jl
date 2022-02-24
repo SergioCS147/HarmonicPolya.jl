@@ -1,14 +1,3 @@
-module HarmonicBases; 
-
-using LinearAlgebra: length
-using LinearAlgebra, DynamicPolynomials, MultivariatePolynomials;
-const MP = MultivariatePolynomials
-const DP = DynamicPolynomials
-
-#function fixedexponents(::DP.AbstractMonomial,n)
-#    return exponents(prod(x .^ 0)*poly) 
-#end
-
 function generatemonomials(x,m,;option=0)
     mons = [];
     if option == 0
@@ -136,12 +125,3 @@ function harmonicdecomposition(u,vars)
     return [ (2*i,sum([dcoefficient(n,m,i,j)*norm^(j-i)*laplacian(u,vars,power=j) for j in i:floor(Int,m/2)])) for i in 0:floor(Int,m/2) ];
 end
 
-function laplacianmatrix(m,vars)
-    mons = generatemonomials(vars,m);
-    image = map(p->laplacian(p,vars),mons);
-    immons = generatemonomials(vars,m-2);
-    pairs = collect(Base.product(immons,image));
-    return map(v-> coefficient(v[2],v[1]),pairs)
-end
-
-end

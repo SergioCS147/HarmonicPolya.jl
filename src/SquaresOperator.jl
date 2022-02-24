@@ -1,9 +1,4 @@
-module SquaresOperator;
-
-include("HarmonicBases.jl")
-using LinearAlgebra, DynamicPolynomials, SpecialFunctions, .HarmonicBases
-
-function eigenvalues(n,m,k)
+function squareseigenvalues(n,m,k)
     if m < 0
         throw(DomainError(m,"order must be non-negative"));
     end
@@ -28,8 +23,8 @@ function eigenvalues(n,m,k)
     return values #.* normalization
 end
 
-function evaluation(m,p,vars)
-    desc = HarmonicBases.harmonicdecomposition(p,vars)
+function squaresevaluation(m,p,vars)
+    desc = harmonicdecomposition(p,vars)
     n = length(vars)
     k = floor(Int,maxdegree(p)/2)
     if 2*k != maxdegree(p)
@@ -38,13 +33,13 @@ function evaluation(m,p,vars)
     if 2*k != mindegree(p)
         throw(DomainError(p,"polynomial p must be homogeneous"))
     end
-    eigvals = eigenvalues(n,m,k)
+    eigvals = squareseigenvalues(n,m,k)
     norm = sum(vars .* vars)
     return sum( eigvals[floor(Int,u[1]/2)+1]*norm^(floor(Int,u[1]/2))*u[2] for u in desc )
 end
 
-function inverseeval(m,p,vars)
-    desc = HarmonicBases.harmonicdecomposition(p,vars)
+function squaresinverseeval(m,p,vars)
+    desc = harmonicdecomposition(p,vars)
     n = length(vars)
     k = floor(Int,maxdegree(p)/2)
     if 2*k != maxdegree(p)
@@ -53,9 +48,7 @@ function inverseeval(m,p,vars)
     if 2*k != mindegree(p)
         throw(DomainError(p,"polynomial p must be homogeneous"))
     end
-    eigvals = eigenvalues(n,m,k)
+    eigvals = squareseigenvalues(n,m,k)
     norm = sum(vars .* vars)
     return sum( (1/eigvals[floor(Int,u[1]/2)+1])*norm^(floor(Int,u[1]/2))*u[2] for u in desc )
-end
-
 end
