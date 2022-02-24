@@ -2,3 +2,6 @@
 .vscode
 /.vscode
 .vscode/
+graphs/
+src/demos/
+.DS_Store
