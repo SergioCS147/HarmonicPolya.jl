@@ -1,0 +1,13 @@
+name = "HarmonicPolya"
+uuid = "b10334e6-62a0-49f3-b499-8d73f60d8842"
+authors = ["Sergio Cristancho <sergiocs147@gmail.com>","Mauricio Velasco <mauvelasco@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+LinearAlgebra
+MultivariatePolynomials
+DynamicPolynomials
+FastGaussQuadrature
+SpecialFunctions
+PolynomialBases
+FixedPolynomials
