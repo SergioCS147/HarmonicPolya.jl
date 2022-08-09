@@ -1,4 +1,4 @@
-# HarmonicPolya
+# HarmonicPolya.jl
 
 This is a package for homogeneous polynomial minimization on the sphere using harmonic hierarchies found in [Cristancho & Velasco](https://arxiv.org/abs/2202.12865) also implementing two required features: polynomial cubature/quadrature rules on the sphere using [FastGaussQuadrature](https://github.com/JuliaApproximation/FastGaussQuadrature.jl) and harmonic polynomial analysis on the sphere based on [Axler & Ramey](https://www.ams.org/journals/proc/1995-123-12/S0002-9939-1995-1277092-1/S0002-9939-1995-1277092-1.pdf). The implementation of polynomials uses [DynamicPolynomials](https://github.com/JuliaAlgebra/DynamicPolynomials.jl) although [FixedPolynomials](https://github.com/JuliaAlgebra/FixedPolynomials.jl) is suggested for calculations using quadratures.
 
