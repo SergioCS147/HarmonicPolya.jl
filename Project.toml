@@ -13,7 +13,7 @@ PolynomialBases = "c74db56a-226d-5e98-8bb0-a6049094aeea"
 SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 
 [compat]
-MultivariatePolynomials = "0.1.0, 0.4.6"
+MultivariatePolynomials = "0.2.0, 0.4.6"
 DynamicPolynomials = "0.1.0, 0.4.5"
 FastGaussQuadrature = "0.4.9"
 FixedPolynomials = "0.3.2, 0.4.0"
