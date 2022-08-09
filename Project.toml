@@ -1,4 +1,4 @@
-name = "HarmonicPolya"
+name = "HarmonicPolya.jl"
 uuid = "ace2b9e4-5609-4448-9398-3ff0de655bd8"
 authors = ["SergioCS147 <sergicristsanch@icloud.com>"]
 version = "0.1.0"
