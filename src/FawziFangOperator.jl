@@ -65,7 +65,7 @@ function ffeigenvalues(n,m,k)
     eta = (sqrt(normalizationfactor(n,0))/surfaceareasphere(n)) * LinearAlgebra.inv(sqrt(Amatrix(n,m,k,0))) * e
     values = [];
     for i in 0:1:k
-        lambda = dot(eta,Amatrix(n,m,k,2*i)*eta)*(PolynomialBases.gegenbauer(1.0,2*i,(n-2)/2)^2 * SphericalQuadrature.surfaceareasphere(n)^2)/((binomial(n+2*i-1,2*i)-binomial(n+2*i-3,2*i-2))^2 * normalizationfactor(n,2*i));
+        lambda = dot(eta,Amatrix(n,m,k,2*i)*eta)*(PolynomialBases.gegenbauer(1.0,2*i,(n-2)/2)^2 * surfaceareasphere(n)^2)/((binomial(n+2*i-1,2*i)-binomial(n+2*i-3,2*i-2))^2 * normalizationfactor(n,2*i));
         push!(values, lambda);
     end
     return values;

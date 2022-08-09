@@ -1,11 +1,11 @@
 function generatemonomials(x,m,;option=0)
     mons = [];
     if option == 0
-        mons = monomials(x,[1:m;], mon -> (degree(mon) == m));
-    elseif 1 <= option <= n
-        mons = monomials(x,[1:m;], mon -> ((degree(mon) == m)&&(degree(mon,x[option])<=1)));
+        mons = monomials(x,[1:m;], mon -> (DynamicPolynomials.degree(mon) == m));
+    elseif 1 <= option <= length(x)
+        mons = monomials(x,[1:m;], mon -> ((DynamicPolynomials.degree(mon) == m)&&(DynamicPolynomials.degree(mon,x[option])<=1)));
     else 
-        throw(DomainError(option,"option must be non-negative and <=$(n)"))
+        throw(DomainError(option,"option must be non-negative and <=$(length(x))"))
     end
     return mons
 end
@@ -13,9 +13,9 @@ end
 function differentiatepow(u,var::MP.AbstractVariable;power=1)
     res = u;
     if power>1
-        res = differentiate(differentiatepow(u,var,power=power-1),var);
+        res = DynamicPolynomials.differentiate(differentiatepow(u,var,power=power-1),var);
     elseif power==1
-        res = differentiate(u,var);
+        res = DynamicPolynomials.differentiate(u,var);
     elseif power < 0
         throw(DomainError(power,"power must be non-negative"));
     end
@@ -37,7 +37,7 @@ function polyderivative(u,poly,vars)
     pterms = terms(poly);
     pcoefs = map(coefficient,pterms);
     pmons = map(monomial,pterms);
-    fixedexp = z -> exponents(prod(vars.^0)*z);
+    fixedexp = z -> DynamicPolynomials.exponents(prod(vars.^0)*z);
     ppows = map(fixedexp,pmons);
     Dvec = map(z->dalpha(u,z,vars),ppows);
     if length(pcoefs)!= length(Dvec)
@@ -62,9 +62,9 @@ function normpartialder(hvec,var::MP.AbstractVariable,vars,;power=1)
     res = hvec;
     if power>1
         der = normpartialder(hvec,var,vars,power=power-1)
-        res = (der[1]-2,der[1]*var*der[2]+sum(vars.*vars)*differentiate(der[2],var));
+        res = (der[1]-2,der[1]*var*der[2]+sum(vars.*vars)*DynamicPolynomials.differentiate(der[2],var));
     elseif power==1
-        res = (hvec[1]-2,hvec[1]*var*hvec[2]+sum(vars.*vars)*differentiate(hvec[2],var));
+        res = (hvec[1]-2,hvec[1]*var*hvec[2]+sum(vars.*vars)*DynamicPolynomials.differentiate(hvec[2],var));
     elseif power < 0
         throw(DomainError(power,"power must be non-negative"));
     end
@@ -87,7 +87,7 @@ function normpolyderivative(hvec,poly,vars)
     pterms = terms(poly);
     pcoefs = map(coefficient,pterms);
     pmons = map(monomial,pterms);
-    fixedexp = z -> exponents(prod(vars.^0)*z);
+    fixedexp = z -> DynamicPolynomials.exponents(prod(vars.^0)*z);
     ppows = map(fixedexp,pmons);
     Dvec = map(z->normdalpha(hvec,z,x),ppows);
     if length(pcoefs)!= length(Dvec)
@@ -100,7 +100,7 @@ function generatebasissphere(m, vars)
     n = length(vars)
     genpoly = (2-n,1);
     monos = generatemonomials(vars,m,option=1);
-    fixedexp = z -> exponents(prod(vars.^0)*z);
+    fixedexp = z -> DynamicPolynomials.exponents(prod(vars.^0)*z);
     mpows = map(fixedexp,monos)
     return map(m->normdalpha(genpoly,m,vars)[2],mpows)
 end

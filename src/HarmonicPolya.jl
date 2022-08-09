@@ -20,6 +20,8 @@ include("FawziFangOperator.jl")
 include("SphereMinimization.jl")
 
 export harmonicdecomposition
+export generatebasissphere
+export laplacian
 export sphericalquadrature
 export upperbound 
 export lowerboundfawzi
